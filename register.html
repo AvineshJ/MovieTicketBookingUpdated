@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avinesh Cinemas</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body >
+    <h1>REGISTER TO GET DISCOUNTS UPTO 50% OFF!</h1>
+    <style>
+        body {background-color: black;
+            color: red;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin: 0 auto;
+            width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        input[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: red;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0a0a0a;
+        }
+
+        .error {
+            color: red;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+    </style>
+    
+        <form name="registrationForm">
+            <label for="reg_id">Registration ID (ex: 23WP0001):</label>
+            <input type="text" id="reg_id" name="reg_id" placeholder="Registration id" required>
+            <br><br>
+            <label for="username">Username (no digits):</label>
+            <input type="text" id="username" name="username" placeholder="username" required>
+            <br><br>
+            <label for="password">Password (at least 1 lowercase letter, 1 uppercase letter, 1 digit, 1 special character, min. length 8):</label>
+            <input type="password" id="password" name="password" placeholder="password" required>
+            <br><br>
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" placeholder="email" required>
+            <br><br>
+            <label for="mobile">Mobile number (exactly 10 digits, no leading zeros):</label>
+            <input type="tel" id="mobile" name="mobile" placeholder="mobile number" required>
+            <br><br>
+            <label for="dob">Date of Birth (DDMMYYYY):</label>
+            <input type="text" id="dob" name="dob" placeholder="Date of birth" required>
+            <br><br>
+            <input type="submit" value="Submit" onclick="validateForm()">
+        </form>
+    
+    <script>
+        function validateForm() {
+            var regId = document.forms["registrationForm"]["reg_id"].value;
+            var username = document.forms["registrationForm"]["username"].value;
+            var password = document.forms["registrationForm"]["password"].value;
+            var email = document.forms["registrationForm"]["email"].value;
+            var mobile = document.forms["registrationForm"]["mobile"].value;
+            var dob = document.forms["registrationForm"]["dob"].value;
+
+            var regIdPattern = /^[0-9]{2}[A-Z]{2}[0-9]{4}$/;
+            var usernamePattern = /^[A-Za-z]+$/;
+            var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var mobilePattern = /^[1-9][0-9]{9}$/;
+            var dobPattern = /^[0-9]{8}$/;
+
+            
+            if (!regIdPattern.test(regId)) {
+                alert("Invalid registration ID");
+                return false;
+            }
+            if (!usernamePattern.test(username)) {
+                alert("Username should not have any digits");
+                return false;
+            }
+            if (!passwordPattern.test(password)) {
+                alert("Password should have at least 1 lowercase letter, 1 uppercase letter, 1 digit, 1 special character, and a minimum length of 8");
+                return false;
+            }
+            if (!emailPattern.test(email)) {
+                alert("Invalid email address");
+                return false;
+            }
+            if (!mobilePattern.test(mobile)) {
+                alert("Mobile number should be exactly 10 digits and should not have any leading zeros");
+                return false;
+            }
+            if (!dobPattern.test(dob)) {
+                alert("Invalid date of birth (DDMMYYYY)");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
