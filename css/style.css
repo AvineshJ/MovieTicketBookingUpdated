@@ -43,7 +43,7 @@
       }
 
       .seat {
-        background-color: #444451;
+        background-color: #24de31;
         height: 12px;
         width: 15px;
         margin: 3px;
@@ -51,11 +51,11 @@
       }
 
       .seat.selected {
-        background-color: #6feaf6;
+        background-color: #eef613;
       }
 
       .seat.occupied {
-        background-color: #fff;
+        background-color: #1a64e4;
       }
 
       .seat:nth-of-type(2) {
@@ -118,10 +118,7 @@
         color: #6feaf6;
       }
 
-      /* body{
-        transform: scale(1.4);
-      } */
-
+     
 
       .status{
           color:white;

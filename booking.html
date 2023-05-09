@@ -6,10 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Avinesh Cinemas</title>
     <link rel="stylesheet" href="css/style.css">
-    
-    <style>
-      
-    </style>
   </head>
   <body>
     
@@ -30,7 +26,7 @@
     <ul class="showcase">
       <li>
         <div id="seat" class="seat"></div>
-        <small class="status" style="font-size: 1em;">N/A</small>
+        <small class="status" style="font-size: 1em;">Available</small>
       </li>
       <li>
         <div id="seat" class="seat selected"></div>
@@ -41,7 +37,7 @@
         <small class="status" style="font-size: 1em;">Occupied</small>
       </li>
     </ul>
-
+<form name="f1">
     <div class="container">
       <div class="screen"></div>
 
@@ -106,12 +102,13 @@
         <div id="seat" class="seat"></div>
       </div>
     </div>
+     <input type="submit" value="Book" class="btn-home" onclick="bookingvalidation()"> <input type="button" onClick="window.location.reload();" value="Cancel" class="btn-home" >
+  </form>
 
     <p class="text" style="font-size: 1em;margin:0px 0px 15px 0px">
       You have selected <span id="count">0</span> seats for a price of Rs.<span
         id="total"
-        >0</span
-      >
+        >0</span>
     </p>
 
     <a href="./index.html">
@@ -122,7 +119,7 @@
     
 
     <script>
-     
+     //calculating total price of tickets
       var count=0;
       var seats=document.getElementsByClassName("seat");
       for(var i=0;i<seats.length;i++){
@@ -130,7 +127,6 @@
         
         item.addEventListener("click",(event)=>{
           var price= document.getElementById("movie").value;
-
           if (!event.target.classList.contains('occupied') && !event.target.classList.contains('selected') ){
           count++;
           
@@ -139,9 +135,18 @@
           document.getElementById("count").innerText=count;
           document.getElementById("total").innerText=total;
 
+           
           }
         })
+        
+        
       }
+      function bookingvalidation(){
+        if(count==0){
+          alert("Please select a minimum of one seat to continue the booking")
+        }
+      }
+      
     </script>
   </body>
 </html>

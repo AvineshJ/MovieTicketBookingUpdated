@@ -22,23 +22,21 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
               </li>
-
-               
-              
-              
-            </ul>
-            
+            </ul>            
           </div>
         </div>
     </nav>
 
     <div>
         <h4 style="color: #E50914; font-weight: 700;" class="text-center my-4">Now Playing</h4>
+        <hr style="color: white;height: 5px;">       
+
+
     </div>
+     <h3 style="color:white;display: inline-block;">The next show is on 15th at 2:00pm, Time left : <div id="timer" style="  width: 90px; margin: 0 auto; color: rgb(239, 0, 0);display: inline-block;">00:00:00</div>
+    </h3>
+   
     <div class="btn-collection-playing my-4">
-        
-        
-        
         <a href="booking.html">
   
           <button class="btn btn-custom">
@@ -50,32 +48,139 @@
   
       
       </div>
-    
-    <div class="container">
-        <div class="row justify-content-around align-items-center">
-          <p style="color: white;">Time:2:00-5:00pm</p>
-             
-            <img src="./image/ps2.jpg" class="img-card col-lg-4 col-md-6 col-sm-12 col-12" style="max-width: 250px;width:90%"/>
-           <p style="color: white;"> Time:5:40-8:40pm</p>
-            <img src="./image/tks.jpg" class="img-card col-lg-4 col-md-6 col-sm-12 col-12" style="max-width: 250px;width:90%"/>
-           <p style="color: white;"> Time:8:40-11:40pm</p>
-            <img src="./image/dasara.jpg" class="img-card col-lg-4 col-md-6 col-sm-12 col-12" style="max-width: 250px;width:90%"/>
-    
-        </div>
-    </div>
-
-
-    
-
+      <hr style="color: white;height: 5px;">       
+          
      
+          <div class="search-container justify-content-center" >
+            <form>
+              <div >
+                <label for="search-input" style="color: red;">Search movies:</label>
+                <input type="text"  id="search-input"  placeholder="Enter movie title">
+           
+              <button type="button" class="btn" style="color:rgb(0, 0, 0);background-color: red;" onclick="searchMovies()" id="search-btn">Search</button>
+            </div>
+            </form>
+            <br>
+            <div  >
+              
+              <div  style="padding-right: 1px;">
+                <label for="genre-select"  style="color: red;">Filter by genre:</label>
+                <select id="genre-select">
+                  <option value="all">All</option>
+                  <option value="drama">Drama</option>
+                  <option value="action">Action</option>
+                  <option value="thriller">Thriller</option>
+                  <!-- Add other genres here -->
+                </select>
+                <button id="filter-btn" class="btn" style="color:rgb(0, 0, 0);background-color: red;">Filter</button>
+              </div>
+              
+            
+          </div>
+
+
+          </div> 
+          <br>
+
+          <div class="container" >
+            
+            <div class="row justify-content-around align-items-center" id="movies-container">
+
+
+              <div class="movie-card col-lg-4 col-md-6 col-sm-12 col-12" data-title="Ponniyin Selvan 2" data-time="2:00-5:00pm" data-genre="drama">
+                <h3 class="movie-title" style="color: white;">Ponniyin Selvan 2</h3>
+                <img src="./image/ps2.jpg" class="movie-image" style="max-width: 250px;width:90%" alt="Ponniyin Selvan 2">
+                <p class="movie-time" style="color: white;">Time: 2:00-5:00pm</p>
+                <p class="movie-genre" style="color: white;">Genre: Drama</p>
+              </div>
+              <div class="movie-card col-lg-4 col-md-6 col-sm-12 col-12" data-title="The Kerala Story" data-time="5:40-8:40pm" data-genre="thriller">
+                <h3 class="movie-title" style="color: white;">The Kerala Story</h3>
+                <img src="./image/tks.jpg" class="movie-image" style="max-width: 250px;width:90%" alt="The Kerala Story">
+                <p class="movie-time" style="color: white;">Time: 5:40-8:40pm</p>
+                <p class="movie-genre" style="color: white;">Genre: Thriller</p>
+              </div>
+              <div class="movie-card col-lg-4 col-md-6 col-sm-12 col-12" data-title="Dasara" data-time="8:40-11:40pm" data-genre="action">
+                <h3 class="movie-title" style="color: white;">Dasara</h3>
+                <img src="./image/dasara.jpg" class="movie-image" style="max-width: 250px;width:90%" alt="Dasara">
+                <p class="movie-time" style="color: white;">Time: 8:40-11:40pm</p>
+                <p class="movie-genre" style="color: white;">Genre: Action</p>
+              </div>
+          </div>
+          </div>
+          <br><br>
+<script>
+  
+// Timer to know when is the next show
+const nextShowTime = new Date("2023-05-17T14:00:00");
+setInterval(updateTimer, 1000);
+function updateTimer() {
+  const now = new Date();
+  const diff = nextShowTime - now;
+  const hours = Math.floor(diff / (1000 * 60 * 60));
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+
+  const timeString = `${hours.toString().padStart(2, "0")}:${minutes
+    .toString()
+    .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+
+  document.getElementById("timer").textContent = timeString;
+}
+
+
+// Search button working
+const searchInput = document.getElementById("search-input");
+searchInput.addEventListener("keyup", searchMovies);
+
+function searchMovies() {
+  
+  const query = document.getElementById("search-input").value.toLowerCase();
+  const cards = document.getElementsByClassName("movie-card"); 
+  for (let i = 0; i < cards.length; i++) {
+    const card = cards[i];
+    const title = card.getElementsByClassName("movie-title")[0].innerText.toLowerCase();
+
+    if (title.includes(query)) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+  }
+}
+
+const searchBtn = document.getElementById("search-btn");
+searchBtn.addEventListener("click", searchMovies);
 
 
 
+//filter button working
+const filterButton = document.getElementById("filter-btn");
+const genreSelect = document.getElementById("genre-select");
+const movies = document.querySelectorAll(".movie-card");
 
+filterButton.addEventListener("click", () => {
+  const selectedGenre = genreSelect.value;
 
+  movies.forEach((movie) => {
+    const movieGenre = movie.dataset.genre;
+    if (selectedGenre === "all" || selectedGenre === movieGenre) {
+      movie.style.display = "block";
+    } else {
+      movie.style.display = "none";
+    }
+  });
+});
 
-
+</script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
 </body>
 </html>
+
+
+
+
+
+
+

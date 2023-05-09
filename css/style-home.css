@@ -10,8 +10,10 @@
 }
 
 .nav-link{
-    color: white !important;
+    color: rgb(0, 0, 0) !important;
     font-weight: 500 !important;
+    border-radius: 10px;
+    font-weight: 800 !important;
 }
 
 .btn-custom{
